@@ -1,4 +1,4 @@
 ang-weather
 ===========
 
-AngularJS weather app with 3 days forecast using OpenWeatherMap API.
+AngularJS weather app with forecast using OpenWeatherMap API.
