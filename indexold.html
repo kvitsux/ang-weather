@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="weather">
+<head>
+	<meta charset="UTF-8">
+	<title>Weather</title>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
+	<script src="app.js"></script>	
+</head>
+<body>
+	<main>
+	<section ng-controller="WeatherTodayCtrl">
+		<h1>{{data.name}}</h1>
+		<ul>
+			<li>Description: {{data.weather[0].description}}</li>
+			<li>Temperature: {{data.main.temp | number:0}}°</li>
+			<li>Humidity: {{data.main.humidity}}%</li>
+			<li>Wind speed: {{data.wind.speed}} km/h</li>
+		</ul>		
+	</section>
+	<section ng-controller="WeatherForecastCtrl">
+		<h1>Forecast for {{data.city.name}}, {{data.city.country}}</h1>
+		<ul ng-repeat="day in data.list">
+			<li>{{day.dt *1000 | date:'EEEE'}}</li>
+			<li>Description: {{day.weather[0].main}}</li>
+			<li>Temperature: {{day.temp.day | number:0}}°</li>
+			<li>Humidity: {{day.humidity}}%</li>
+			<li>Wind speed: {{day.speed}} km/h</li>
+		</ul>
+	</section>
+	<section ng-controller="AnotherCtrl">
+		<h3>Check a different city?</h3>
+		<div ng-show="isLoading">Loading...</div>
+		<form ng-submit="search()">
+			<input type="text" ng-model="searchOptions.query" novalidate>
+		</form>
+		<h1 ng-hide="isLoading || !weather">Forecast for {{weather.city.name}}, {{weather.city.country}}</h1>
+		<ul ng-repeat="day in weather.list" ng-hide="isLoading || !weather">
+			<li>{{day.dt *1000 | date:'EEEE'}}</li>
+			<li>Description: {{day.weather[0].main}}</li>
+			<li>Temperature: {{day.temp.day | number:0}}°</li>
+			<li>Humidity: {{day.humidity}}%</li>
+			<li>Wind speed: {{day.speed}} km/h</li>
+		</ul>
+	</section>
+	</main>
+</body>
+</html>
