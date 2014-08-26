@@ -20,7 +20,7 @@ angular.module('weather', [])
 		if(newCity) {
 			if(timeout) $timeout.cancel(timeout);
 			timeout = $timeout(function() {
-				openweather.event(newCity).success(function(data, status) {						
+				openweather.event(newCity).success(function(data, status)	{					
 					$scope.loc = data;
 					$scope.forecast = data.list;
 				});

@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="weather">
-<head>
-	<meta charset="UTF-8">
-	<title>Weather</title>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
-	<script src="app.js"></script>
-</head>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="weather"> <!--   --> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Weather</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    </head>
 <body>
-	<main>
-		<section ng-controller="WeatherForecastCtrl">
-			<label for="">City</label>
-			<input type="text" ng-model="city" autofocus>
-			<h1 ng-show="city">{{loc.city.name}}, {{loc.city.country}}</h1>
-			<ul ng-repeat="day in forecast" ng-show="city">
-				<li>{{day.dt *1000 | date: 'EEEE'}}</li>
-				<li>{{day.weather[0].main}}</li>
-				<li>{{day.temp.day | number: 0}}°</li>
-				<li>{{day.humidity}}%</li>
-				<li>{{day.speed}} km/h</li>
-			</ul>
-		</section>
-	</main>
+       <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please, <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+	<main ng-controller="WeatherForecastCtrl">		
+		<div class="input">				
+			<input type="text" ng-model="city" autofocus placeholder="Weather in..">
+		</div>
+		<h1 ng-show="city">Weather in {{city}}, {{loc.city.country}}</h1>
+		<section class="forecast">
+			<div ng-repeat-start="day in forecast" ng-if="$first" ng-show="city" class="today">
+				<h2>Today
+				<br>{{day.weather[0].main}}
+				<br>{{day.temp.day | number: 0}}°
+				<br>{{day.humidity}}%
+				<br>{{day.speed}} km/h</h2>
+			</div>
+			<div ng-repeat-end ng-show="city" ng-if="!first">
+				<h3>{{day.dt *1000 | date: 'EEEE'}}
+				<br>{{day.weather[0].main}}
+				<br>{{day.temp.day | number: 0}}°
+				<br>{{day.humidity}}%
+				<br>{{day.speed}} km/h</h3>
+			</div>
+		</section>	
+	</main>	
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+	<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js'></script>
+	<script src="js/app.js"></script>
 </body>
 </html>
