@@ -22,20 +22,31 @@
 		<h1 ng-show="city">Weather in {{city}}, {{loc.city.country}}</h1>
 		<section class="forecast">
 			<div ng-repeat-start="day in forecast" ng-if="$first" ng-show="city" class="today">
-				<h2>Today
-				<br>{{day.weather[0].main}}
-				<br>{{day.temp.day | number: 0}}°
-				<br>{{day.humidity}}%
-				<br>{{day.speed}} km/h</h2>
+	      <h2>
+	        Today
+	        <br>{{day.weather[0].main}}
+	        <span ng-hide="checked"><br>{{day.temp.day | number: 0}}°C</span>
+	        <span ng-hide="!checked"><br>{{day.temp.day *(9/5)+32 | number: 0}}°F</span>
+	        <br>{{day.humidity}}%
+	        <span ng-hide="checked"><br>{{day.speed | number: 2}} km/h</span>
+	        <span ng-hide="!checked"><br>{{day.speed * 0.621371 | number: 2}} mph</span>
+	      </h2>
 			</div>
 			<div ng-repeat-end ng-show="city" ng-if="!first">
-				<h3>{{day.dt *1000 | date: 'EEEE'}}
-				<br>{{day.weather[0].main}}
-				<br>{{day.temp.day | number: 0}}°
-				<br>{{day.humidity}}%
-				<br>{{day.speed}} km/h</h3>
+	      <h3>
+	        {{day.dt *1000 | date: 'EEEE'}}
+	        <br>{{day.weather[0].main}}
+	        <span ng-hide="checked"><br>{{day.temp.day | number: 0}}°C</span>
+	        <span ng-hide="!checked"><br>{{day.temp.day *(9/5)+32 | number: 0}}°F</span>
+	        <br>{{day.humidity}}%
+	        <span ng-hide="checked"><br>{{day.speed | number: 2}} km/h</span>
+	        <span ng-hide="!checked"><br>{{day.speed * 0.621371 | number: 2}} mph</span>
+	      </h3>
 			</div>
-		</section>	
+		</section>
+		<div class="switch">
+    	imperial <input type="checkbox" ng-model="checked">  
+  	</div>
 	</main>	
 	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
 	<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js'></script>
